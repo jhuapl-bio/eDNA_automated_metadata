@@ -4,7 +4,7 @@ The code in this repo are the scripts which generate and execute the entensions'
 The sheet is based on the FAIRe template: https://fair-edna.github.io/index.html and has been adapted for systems and needs aboard the OceanXplorer.
 
 # Set Up and Usage
-In order to use the metadata sheet, you do not need to pull anything from this repo. The code in this repo exists for those who which to understand the functions and/or adapt the scripts to for their own purposes.
+In order to use the metadata sheet, you do not need to pull anything from this repo. The code in this repo exists for those who wish to understand the functions and/or adapt the scripts to for their own purposes.
 
 To use the metadata simply follow the step below to make your own copy, link it to your data files, and start processing you data!
 1) Make a copy of this sheet: https://docs.google.com/spreadsheets/d/12Q50EyFOjgzUrDFeDTH9WpJVlWXpVbs3SB3SPf1Glhk/edit?usp=sharing in your Google Drive. Make folders CTD, ROV, and Flowthrough in the same directory as your sheet copy (or just copy this whole directory).																									
