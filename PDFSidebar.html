@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+  <base target="_top">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <button onclick="generatePdf()">Generate PDF</button>
+  <div id="status" class="status">Ready.</div>
+
+  <script>
+    function setStatus(msg) {
+      document.getElementById('status').textContent = msg;
+    }
+
+    async function getQrDataUrl(text) {
+      const url =
+        'https://quickchart.io/qr?text=' +
+        encodeURIComponent(text) +
+        '&size=300&margin=1';
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('QR fetch failed');
+      }
+
+      const blob = await response.blob();
+
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    async function generatePdf() {
+      setStatus('Reading selected rows...');
+
+      google.script.run
+        .withSuccessHandler(async rows => {
+          try {
+            if (!rows || !rows.length) {
+              setStatus('No rows selected.');
+              return;
+            }
+
+            const { jsPDF } = window.jspdf;
+
+            // True 2" x 1" label
+            const pdf = new jsPDF({
+              orientation: 'landscape',
+              unit: 'pt',
+              format: [144, 72],
+              compress: true
+            });
+
+            for (let i = 0; i < rows.length; i++) {
+              const row = rows[i];
+
+              if (i > 0) {
+                pdf.addPage([144, 72], 'landscape');
+              }
+
+              const qr = await getQrDataUrl(row.barcode_value);
+
+              // White background
+              pdf.setFillColor(255, 255, 255);
+              pdf.rect(0, 0, 144, 72, 'F');
+
+              // QR on left
+              pdf.addImage(qr, 'PNG', 4, 6, 58, 58);
+
+              // Text on right
+              const textX = 66;
+              const textWidth = 74;
+
+              // Line 1: sample_ID
+              pdf.setFont('helvetica', 'bold');
+              pdf.setFontSize(7.2);
+              const topLines = pdf.splitTextToSize(
+                String(row.text_top || ''),
+                textWidth
+              );
+              pdf.text(topLines.slice(0, 1), textX, 14);
+
+              // Line 2: project_ID
+              pdf.setFont('helvetica', 'normal');
+              pdf.setFontSize(5.8);
+              const bottomLines = pdf.splitTextToSize(
+                String(row.text_bottom || ''),
+                textWidth
+              );
+              pdf.text(bottomLines.slice(0, 1), textX, 25);
+
+              // Line 3: Asset / dive
+              const extra2Lines = pdf.splitTextToSize(
+                String(row.text_extra_2 || ''),
+                textWidth
+              );
+              pdf.text(extra2Lines.slice(0, 2), textX, 36);
+
+              // Line 4: Collection / bottle
+              const extra3Lines = pdf.splitTextToSize(
+                String(row.text_extra_3 || ''),
+                textWidth
+              );
+
+              const extra3Y = extra2Lines.length > 1 ? 56 : 48;
+              pdf.text(extra3Lines.slice(0, 2), textX, extra3Y);
+            }
+
+            window.open(pdf.output('bloburl'), '_blank');
+            setStatus('PDF ready. Print with your DYMO 2x1 settings at 100% scale.');
+          } catch (err) {
+            setStatus('Error:\n' + err.message);
+          }
+        })
+        .withFailureHandler(err => {
+          setStatus('Failed:\n' + err.message);
+        })
+        .getSelectedLabelRows();
+    }
+  </script>
+</body>
+</html>
