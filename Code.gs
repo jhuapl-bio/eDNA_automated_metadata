@@ -14,9 +14,6 @@
 // # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // # OR OTHER DEALINGS IN THE SOFTWARE.
 // #
-// Copy to config.js (or run `bash frontend/make-config.sh`).
-// Base URL of the MBON Flask API. app.js falls back to this value when
-// config.js is missing.
 
 const CONFIG = {
   SHEET_NAME: 'samplesheet_v1',
