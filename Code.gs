@@ -20,7 +20,7 @@ const CONFIG = {
   HEADER_ROW: 4,
   LINK_COLUMN_LETTER: 'B',
 
-  // Paste your deployed Apps Script Web App URL here.
+  // Paste your deployed Apps Script Web App URL here. (see Google Apps Script instructions for how to generate)
   WEB_APP_URL: 'https://script.google.com/macros/s/AKfycby1OIj46v4scWWeWbg8ThATgIMjngda2gY9FACy-tfiU9kloKlCwWFRop8nLFJ2mLBqmQ/exec',
 
   // Google Drive folder containing all BTL files.
