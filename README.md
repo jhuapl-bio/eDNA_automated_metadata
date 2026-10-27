@@ -23,7 +23,7 @@ To use the metadata simply follow the step below to make your own copy, link it 
 9) To import metadata for Flowthrough samples, add the sampling date under eventDate (YYYY-MM-DD), add the Z-time of the sample under z-time in the format YYYY-MM-DDTHH:MM:SSZ, and select Flowthrough under both asset and collection_method.																									
      You may select more than one number for samples that pooled water from multiple bottles.																									
 10) Once you have added the above information for each of your Flowthrough samples, select the rows for all of these samples, then click the Import Data button at the top, then select "Import Flowthrough data from TXTs" from the dropdown menu.																									
-     This should populate each of your selected samples with the appropriate metadata.																									
+     This should populate each of your selected samples with the appropriate metadata.	 																								
 11) See instructions for how to print sample labels using the DYMO Labels button																									
 12) To display your samples on a map, select the rows of the samples you would like to display and click the Sample Map Button at the top. You can choose to display the plotted samples in a sidebar or in a new tab. You can toggle the map layer between ESRI bathymetry or Google Maps.																									
 # AI notice
