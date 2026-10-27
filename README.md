@@ -26,3 +26,5 @@ To use the metadata simply follow the step below to make your own copy, link it 
      This should populate each of your selected samples with the appropriate metadata.																									
 11) See instructions for how to print sample labels using the DYMO Labels button																									
 12) To display your samples on a map, select the rows of the samples you would like to display and click the Sample Map Button at the top. You can choose to display the plotted samples in a sidebar or in a new tab. You can toggle the map layer between ESRI bathymetry or Google Maps.																									
+# AI notice
+AI was used during the development of this code. All scripts have been checked and updated by human developers, but users should be aware that AI was employed as a coding aid.
