@@ -13,7 +13,7 @@
 
 2. Highlight the rows you would like to print labels for, and select the DYMO Labels extension at the top of the sheet
 
-3. Click, “Generate Label PDF from Selected Rows
+3. Click, “Generate Label PDF from Selected Rows"
 
 4. A sidebar will pop-up to the right of the screen, click “Generate PDF” when ready
 
